@@ -13,9 +13,10 @@ public class GeneticAlgorithm
     this.termination = termination;
 
     POPULATION_SIZE = 10;
-    CITIES = "XABCDEFGHIJKLMNOPQRST".toCharArray ();
+    STARTCITY = 'X';
+    VISITED_CITIES; = "ABCDEFGHIJKLMNOPQRST".toCharArray ();
     NUM_CITIES = CITIES.length;
-    population = new char[POPULATION_SIZE][]
+    population = new char [POPULATION_SIZE][];
     initialize ();
   }
   
@@ -39,7 +40,10 @@ public class GeneticAlgorithm
 
   private void initialize ()
   {
-    
+    for (int i = 0; i < POPULATION_SIZE; i++)
+    {
+      
+    }
   }
   
   private char[][] population;
@@ -48,7 +52,8 @@ public class GeneticAlgorithm
   private Crossover crossover;
   private Mutation mutation;
   private Termination termination;
-  final int POPULATION_SIZE = 10;
-  final char[] CITIES; = "XABCDEFGHIJKLMNOPQRST".toCharArray ();
+  final int POPULATION_SIZE;
+  final char STARTCITY;
+  final char[] VISITED_CITIES;
   final int NUM_CITIES;
 }
