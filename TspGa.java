@@ -18,14 +18,13 @@ public class TspGa
     this.mutation = mutation;
     this.termination = termination;
 
-    POPULATION_SIZE = 10;
+    // TSP constants
     STARTCITY = 'X';
     VISITED_CITIES = "ABCDEFGHIJKLMNOPQRST".toCharArray ();
     CITIES = new char [VISITED_CITIES.length + 1];
     CITIES [0] = STARTCITY;
     for (int i = 1; i < CITIES.length; i++)
       CITIES [i] = VISITED_CITIES [i - 1];
-
     NUM_CITIES = CITIES.length;
 
     // distances from IB document
@@ -62,12 +61,15 @@ public class TspGa
         cityDistances.put (CITIES [j], DISTS [i][j]);
       distances.put (CITIES [i], cityDistances);
     }
+
+    // GA constant
+    POPULATION_SIZE = 10;
   }
   
   void run ()
   {
     char[][] population = initializePopulation ();
-    // List<Integer> fitnesses = evaluation.evaluate (population);
+    int[] fitnesses = evaluate (population);
 
     // boolean terminate = false;
     // while (!terminate)
@@ -83,6 +85,7 @@ public class TspGa
     // }
   }
 
+  // initialize population with random permutations of visited cities
   private char[][] initializePopulation ()
   {
     char[][] population = new char [POPULATION_SIZE][];
@@ -103,7 +106,22 @@ public class TspGa
 
     return population;
   }
-  
+
+  // evaluate and return fitnesses of routes in the population
+  private int[] evaluate (char[][] population)
+  {
+    int[] fitnesses = new int [population.length];
+    
+    for (int i = 0; i < population.length; i++)
+    {
+      char[] route = population [i];
+      for (int j = 0; j < route.length - 1; j++)
+        fitnesses [i] -= distances.get (route [j]).get (route [j + 1]);
+    }
+
+    return fitnesses;
+  }
+
   private Selection selection;
   private Evaluation evaluation;
   private Crossover crossover;
