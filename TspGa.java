@@ -105,7 +105,9 @@ public class TspGa
     return population;
   }
 
-  // evaluate and return fitnesses of routes in the population
+  // evaluate and return fitnesses of routes in the population; note
+  // that fitness is the opposite of route length (negative); to
+  // minimize route length, we can maximize this fitness measure
   private int[] evaluate (char[][] population)
   {
     int[] fitnesses = new int [population.length];
