@@ -7,13 +7,11 @@ import java.util.HashMap;
 public class TspGa
 {
   public TspGa (Selection selection,
-                Evaluation evaluation,
                 Crossover crossover,
                 Mutation mutation,
                 Termination termination)
   {
     this.selection = selection;
-    this.evaluation = evaluation;
     this.crossover = crossover;
     this.mutation = mutation;
     this.termination = termination;
@@ -123,7 +121,6 @@ public class TspGa
   }
 
   private Selection selection;
-  private Evaluation evaluation;
   private Crossover crossover;
   private Mutation mutation;
   private Termination termination;
@@ -136,7 +133,6 @@ public class TspGa
 }
 
 class Selection {}
-class Evaluation {}
 class Crossover {}
 class Mutation {}
 class Termination {}
