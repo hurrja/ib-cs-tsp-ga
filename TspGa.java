@@ -27,8 +27,6 @@ public class TspGa
       CITIES [i] = VISITED_CITIES [i - 1];
 
     NUM_CITIES = CITIES.length;
-    population = new char [POPULATION_SIZE][];
-    initialize ();
 
     // distances from IB document
     final int[][] DISTS =
@@ -68,6 +66,7 @@ public class TspGa
   
   void run ()
   {
+    char[][] population = initializePopulation ();
     // List<Integer> fitnesses = evaluation.evaluate (population);
 
     // boolean terminate = false;
@@ -84,8 +83,9 @@ public class TspGa
     // }
   }
 
-  private void initialize ()
+  private char[][] initializePopulation ()
   {
+    char[][] population = new char [POPULATION_SIZE][];
     List<Character> visitedCities = new ArrayList<> ();
     for (char c : VISITED_CITIES)
       visitedCities.add (c);
@@ -100,9 +100,10 @@ public class TspGa
       for (char c : visitedCities)
         population [i][j++] = c;
     }
+
+    return population;
   }
   
-  private char[][] population;
   private Selection selection;
   private Evaluation evaluation;
   private Crossover crossover;
