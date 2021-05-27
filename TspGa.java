@@ -21,7 +21,12 @@ public class TspGa
     POPULATION_SIZE = 10;
     STARTCITY = 'X';
     VISITED_CITIES = "ABCDEFGHIJKLMNOPQRST".toCharArray ();
-    NUM_CITIES = VISITED_CITIES.length + 1;
+    CITIES = new char [VISITED_CITIES.length + 1];
+    CITIES [0] = STARTCITY;
+    for (int i = 1; i < CITIES.length; i++)
+      CITIES [i] = VISITED_CITIES [i - 1];
+
+    NUM_CITIES = CITIES.length;
     population = new char [POPULATION_SIZE][];
     initialize ();
 
@@ -97,6 +102,7 @@ public class TspGa
   final int POPULATION_SIZE;
   final char STARTCITY;
   final char[] VISITED_CITIES;
+  final char[] CITIES;
   final int NUM_CITIES;
   Map<Character, Map<Character, Integer>> distances;
 }
