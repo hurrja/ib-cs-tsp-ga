@@ -1,15 +1,19 @@
 import java.util.Comparator;
 import java.util.Arrays;
 
+// class for selecting parents for next generation
 public abstract class Selection
 {
+  // returns array of parents for next generation
   public char[][] select (char[][] population, Integer[] fitnesses)
   {
     Integer[] sortIndices = sortIndices (fitnesses);
     return doSelection (population, fitnesses, sortIndices);
   }
   
-  // needs to be implemented by all concrete classes
+  // selection from population using fitnesses, with indices
+  // containing sort order based on fitnesses; needs to be implemented
+  // by all concrete classes
   protected abstract char[][] doSelection (char[][] population,
                                            Integer[] fitnesses,
                                            Integer[] sortIndices);
@@ -27,11 +31,10 @@ public abstract class Selection
 
     return indices;
   }
-
 }
 
-// comparator class which sorts the array of indices using based on
-// values from another array of indices (fitnesses)
+// comparator for array of indices based on values from the array the
+// indices refer to (for index sorting based on array contents)
 class ArrayIndexComparator implements Comparator<Integer>
 {
   public ArrayIndexComparator (Integer[] array)
