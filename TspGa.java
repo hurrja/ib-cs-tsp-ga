@@ -86,7 +86,7 @@ public class TspGa
     }
   }
 
-  // initialize population with random permutations of visited cities
+  // return population with random permutations of visited cities
   private char[][] initializePopulation ()
   {
     char[][] population = new char [POPULATION_SIZE][];
