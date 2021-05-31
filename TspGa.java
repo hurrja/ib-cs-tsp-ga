@@ -69,18 +69,19 @@ public class TspGa
     char[][] population = initializePopulation ();
     int[] fitnesses = evaluate (population);
 
-    // boolean terminate = false;
-    // while (!terminate)
-    // {
-    //   population = selection.select (population, fitnesses);
-    //   population = crossover.crossover (population);
-    //   population = mutation.mutate (population);
-    //   List<Integer> newFitnesses = evaluation.evaluate (population);
-    //   if (Termination.terminate (newFitnesses, fitnesses))
-    //     terminate = true;
-    //   else
-    //     fitnesses = newFitnesses;
-    // }
+    boolean terminate = false;
+    while (!terminate)
+    {
+      char[][] parents = selection.select (population, fitnesses);
+      terminate = true;
+      //   population = crossover.crossover (population);
+      //   population = mutation.mutate (population);
+      //   List<Integer> newFitnesses = evaluation.evaluate (population);
+      //   if (Termination.terminate (newFitnesses, fitnesses))
+      //     terminate = true;
+      //   else
+      //     fitnesses = newFitnesses;
+    }
   }
 
   // initialize population with random permutations of visited cities
@@ -134,7 +135,6 @@ public class TspGa
   Map<Character, Map<Character, Integer>> distances;
 }
 
-class Selection {}
 class Crossover {}
 class Mutation {}
 class Termination {}
