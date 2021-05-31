@@ -67,13 +67,15 @@ public class TspGa
   void run ()
   {
     char[][] population = initializePopulation ();
-    int[] fitnesses = evaluate (population);
+    Integer[] fitnesses = evaluate (population);
 
     boolean terminate = false;
     while (!terminate)
     {
       char[][] parents = selection.select (population, fitnesses);
       terminate = true;
+      for (char[] route : parents)
+        System.out.println (java.util.Arrays.toString (route));
       //   population = crossover.crossover (population);
       //   population = mutation.mutate (population);
       //   List<Integer> newFitnesses = evaluation.evaluate (population);
@@ -109,13 +111,15 @@ public class TspGa
   // evaluate and return fitnesses of routes in the population; note
   // that fitness is the opposite of route length (negative); to
   // minimize route length, we can maximize this fitness measure
-  private int[] evaluate (char[][] population)
+  private Integer[] evaluate (char[][] population)
   {
-    int[] fitnesses = new int [population.length];
+    Integer[] fitnesses = new Integer [population.length];
     
     for (int i = 0; i < population.length; i++)
     {
       char[] route = population [i];
+      fitnesses [i] = 0;
+      
       for (int j = 0; j < route.length - 1; j++)
         fitnesses [i] -= distances.get (route [j]).get (route [j + 1]);
     }
