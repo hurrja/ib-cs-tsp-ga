@@ -74,8 +74,7 @@ public class TspGa
     {
       char[][] parents = selection.select (population, fitnesses);
       terminate = true;
-      for (char[] route : parents)
-        System.out.println (java.util.Arrays.toString (route));
+      printPopulation (parents);
       //   population = crossover.crossover (population);
       //   population = mutation.mutate (population);
       //   List<Integer> newFitnesses = evaluation.evaluate (population);
@@ -125,6 +124,12 @@ public class TspGa
     }
 
     return fitnesses;
+  }
+
+  private void printPopulation (char[][] population)
+  {
+    for (char[] individual : population)
+        System.out.println (java.util.Arrays.toString (individual));
   }
 
   private Selection selection;
