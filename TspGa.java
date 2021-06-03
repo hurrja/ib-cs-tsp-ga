@@ -7,6 +7,7 @@ import java.util.HashMap;
 public class TspGa
 {
   public TspGa (Selection selection,
+//                Reproduction reproduction,
                 Crossover crossover,
                 Mutation mutation,
                 Termination termination)
@@ -60,8 +61,9 @@ public class TspGa
       distances.put (CITIES [i], cityDistances);
     }
 
-    // GA constant
+    // GA constants
     POPULATION_SIZE = 10;
+    ELITISTS = 2;
   }
   
   void run ()
@@ -73,8 +75,11 @@ public class TspGa
     while (!terminate)
     {
       char[][] parents = selection.select (population, fitnesses);
-      terminate = true;
       printPopulation (parents);
+      terminate = true;
+
+      // char[][] offspring = reproduction.reproduce (parents, crossover, POPULATION_SIZE, ELITISTS);
+
       //   population = crossover.crossover (population);
       //   population = mutation.mutate (population);
       //   List<Integer> newFitnesses = evaluation.evaluate (population);
@@ -137,6 +142,7 @@ public class TspGa
   private Mutation mutation;
   private Termination termination;
   final int POPULATION_SIZE;
+  final int ELITISTS;
   final char STARTCITY;
   final char[] VISITED_CITIES;
   final char[] CITIES;
@@ -144,6 +150,5 @@ public class TspGa
   Map<Character, Map<Character, Integer>> distances;
 }
 
-class Crossover {}
 class Mutation {}
 class Termination {}
