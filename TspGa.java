@@ -3,6 +3,8 @@ import java.util.List;
 import java.util.Collections;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Comparator;
+import java.util.Arrays;
 
 public class TspGa
 {
@@ -69,12 +71,14 @@ public class TspGa
   void run ()
   {
     char[][] population = initializePopulation ();
-    Integer[] fitnesses = evaluate (population);
+    char[][] sortedPopulation = new char [POPULATION_SIZE][];
+    int[] sortedFitnesses = new int [POPULATION_SIZE];
+    evaluate (population, sortedPopulation, sortedFitnesses);
 
     boolean terminate = false;
     while (!terminate)
     {
-      char[][] parents = selection.select (population, fitnesses);
+      char[][] parents = selection.select (sortedPopulation, sortedFitnesses);
       printPopulation (parents);
       terminate = true;
 
@@ -112,10 +116,11 @@ public class TspGa
     return population;
   }
 
-  // evaluate and return fitnesses of routes in the population; note
-  // that fitness is the opposite of route length (negative); to
-  // minimize route length, we can maximize this fitness measure
-  private Integer[] evaluate (char[][] population)
+  // evaluate, sort and return sorted population and sorted fitnesses
+  // of routes in the population (in 2nd and 3rd parameter); note that
+  // fitness is the opposite of route length (negative); to minimize
+  // route length, we can maximize this fitness measure
+  private void evaluate (char[][] population, char[][] sortedPopulation, int[] sortedFitnesses)
   {
     Integer[] fitnesses = new Integer [population.length];
     
@@ -127,14 +132,33 @@ public class TspGa
       for (int j = 0; j < route.length - 1; j++)
         fitnesses [i] -= distances.get (route [j]).get (route [j + 1]);
     }
-
-    return fitnesses;
+    Integer[] sortedIndices = sortIndices (fitnesses);
+    for (int i = 0; i < population.length; i++)
+    {
+      int currentIndex = sortedIndices [i];
+      sortedPopulation [i] = population [currentIndex];
+      sortedFitnesses [i] = fitnesses [currentIndex];
+    }
   }
 
   private void printPopulation (char[][] population)
   {
     for (char[] individual : population)
         System.out.println (java.util.Arrays.toString (individual));
+  }
+
+  // returns an array ind of indices which sorts the fitness array so
+  // that fitnesses[ind[0]] > fitnesses[ind[1]] > fitnesses[ind[2]]
+  // etc.
+  private Integer[] sortIndices (Integer[] fitnesses)
+  {
+    ArrayIndexComparator comparator = new ArrayIndexComparator (fitnesses);
+    Integer[] indices = comparator.createIndexArray ();
+    
+    // sort in descending order
+    Arrays.sort (indices, comparator.reversed ()); 
+    
+    return indices;
   }
 
   private Selection selection;
@@ -152,3 +176,29 @@ public class TspGa
 
 class Mutation {}
 class Termination {}
+
+// comparator for array of indices based on values from the array the
+// indices refer to (for index sorting based on array contents)
+class ArrayIndexComparator implements Comparator<Integer>
+{
+  public ArrayIndexComparator (Integer[] array)
+  {
+    this.array = array;
+  }
+  
+  public Integer[] createIndexArray ()
+  {
+    Integer[] indices = new Integer [array.length];
+    for (int i = 0; i < array.length; i++)
+      indices [i] = i;
+    return indices;
+  }
+  
+  @Override
+  public int compare (Integer index1, Integer index2)
+  {
+    return array [index1].compareTo (array [index2]);
+  }
+  
+  private final Integer[] array;
+}
