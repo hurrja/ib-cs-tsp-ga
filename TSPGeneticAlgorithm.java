@@ -145,7 +145,7 @@ public class TSPGeneticAlgorithm
       char[] route = population [i];
       
       // add distances from and to start city
-      fitnesses [i] = distances.get (STARTCITY).get (route [0]);
+      fitnesses [i] = -distances.get (STARTCITY).get (route [0]);
       fitnesses [i] -= distances.get (STARTCITY).get (route [route.length - 1]);
       
       // add city to city distances
