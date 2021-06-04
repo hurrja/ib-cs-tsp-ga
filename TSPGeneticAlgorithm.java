@@ -6,14 +6,14 @@ import java.util.HashMap;
 import java.util.Comparator;
 import java.util.Arrays;
 
-public class TspGa
+public class TSPGeneticAlgorithm
 {
   // if no mutation is desired, parameter mutation can be null
-  public TspGa (int populationSize,
-                int numElites,
-                Selection selection,
-                Crossover crossover,
-                Mutation mutation)
+  public TSPGeneticAlgorithm (int populationSize,
+                              int numElites,
+                              Selection selection,
+                              Crossover crossover,
+                              Mutation mutation)
   {
     POPULATION_SIZE = populationSize;
     NUM_ELITES = numElites;

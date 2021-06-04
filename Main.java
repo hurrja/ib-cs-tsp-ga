@@ -10,11 +10,11 @@ public class Main
     // switch two random cities on the average in in 1/param individuals
     final Mutation mutation = new SwitchMutation (20); 
 
-    TspGa ga = new TspGa (POPULATION_SIZE,
-                          NUM_ELITES,
-                          selection,
-                          crossover,
-                          mutation);
+    TSPGeneticAlgorithm ga = new TSPGeneticAlgorithm (POPULATION_SIZE,
+                                                      NUM_ELITES,
+                                                      selection,
+                                                      crossover,
+                                                      mutation);
     ga.run ();
   }
 }
