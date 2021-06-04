@@ -9,7 +9,6 @@ import java.util.Arrays;
 public class TspGa
 {
   public TspGa (Selection selection,
-//                Reproduction reproduction,
                 Crossover crossover,
                 Mutation mutation,
                 Termination termination)
@@ -65,7 +64,7 @@ public class TspGa
 
     // GA constants
     POPULATION_SIZE = 10;
-    ELITISTS = 2;
+    NUM_ELITES = 2;
   }
   
   void run ()
@@ -78,11 +77,10 @@ public class TspGa
     boolean terminate = false;
     while (!terminate)
     {
-      char[][] parents = selection.select (sortedPopulation, sortedFitnesses);
-      printPopulation (parents);
+      char[][] sortedParents = selection.select (sortedPopulation, sortedFitnesses);
+      char[][] offspring = reproduce (sortedParents, crossover, POPULATION_SIZE, NUM_ELITES);
+      printPopulation (offspring);
       terminate = true;
-
-      // char[][] offspring = reproduction.reproduce (parents, crossover, POPULATION_SIZE, ELITISTS);
 
       //   population = crossover.crossover (population);
       //   population = mutation.mutate (population);
@@ -141,6 +139,30 @@ public class TspGa
     }
   }
 
+  private char[][] reproduce (char[][] parents,
+                              Crossover crossover,
+                              int populationSize,
+                              int numElites)
+  {
+    char[][] offspring = new char [populationSize][];
+    int numOffspring;
+
+    // select elites for next round
+    for (numOffspring = 0; numOffspring < numElites && numOffspring < populationSize; numOffspring++)
+      offspring [numOffspring] = parents [numOffspring];
+    
+    int numParents = parents.length;
+    while (numOffspring < populationSize)
+    {
+      int[] parentIndices = new int [2];
+      RandomUtils.randomIntegerPair (numParents, parentIndices);
+      offspring [numOffspring++] = crossover.crossover (parents [parentIndices [0]],
+                                                        parents [parentIndices [0]]);
+    }
+
+    return offspring;
+  }
+  
   private void printPopulation (char[][] population)
   {
     for (char[] individual : population)
@@ -166,7 +188,7 @@ public class TspGa
   private Mutation mutation;
   private Termination termination;
   final int POPULATION_SIZE;
-  final int ELITISTS;
+  final int NUM_ELITES;
   final char STARTCITY;
   final char[] VISITED_CITIES;
   final char[] CITIES;
