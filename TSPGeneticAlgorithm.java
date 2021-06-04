@@ -67,6 +67,8 @@ public class TSPGeneticAlgorithm
       distances.put (CITIES [i], cityDistances);
     }
 
+    // make this map immutable
+    distances = Collections.unmodifiableMap (distances); 
   }
   
   void run ()
@@ -143,9 +145,10 @@ public class TSPGeneticAlgorithm
     for (int i = 0; i < population.length; i++)
     {
       char[] route = population [i];
+      fitnesses [i] = 0;
       
       // add distances from and to start city
-      fitnesses [i] = -distances.get (STARTCITY).get (route [0]);
+      fitnesses [i] -= distances.get (STARTCITY).get (route [0]);
       fitnesses [i] -= distances.get (STARTCITY).get (route [route.length - 1]);
       
       // add city to city distances
