@@ -71,26 +71,30 @@ public class TspGa
   
   void run ()
   {
-    char[][] population = initializePopulation ();
     char[][] sortedPopulation = new char [POPULATION_SIZE][];
     int[] sortedFitnesses = new int [POPULATION_SIZE];
-    evaluate (population, sortedPopulation, sortedFitnesses);
+    evaluate (initializePopulation (), sortedPopulation, sortedFitnesses);
 
     boolean terminate = false;
+    int generation = 1;
     while (!terminate)
     {
+      System.out.print ("gen [ " + generation + " ] fit [ " + sortedFitnesses [0] + " ] ");
+      System.out.println (" best [ " + routeToString (sortedPopulation [0]) + " ]");
       char[][] sortedParents = selection.select (sortedPopulation, sortedFitnesses);
       char[][] offspring = reproduce (sortedParents, crossover, POPULATION_SIZE, NUM_ELITES);
-      printPopulation (offspring);
-      terminate = true;
 
-      //   population = crossover.crossover (population);
-      //   population = mutation.mutate (population);
-      //   List<Integer> newFitnesses = evaluation.evaluate (population);
-      //   if (Termination.terminate (newFitnesses, fitnesses))
-      //     terminate = true;
-      //   else
-      //     fitnesses = newFitnesses;
+      char[][] sortedOffspring = new char [POPULATION_SIZE][];
+      int[] sortedOffspringFitnesses = new int [POPULATION_SIZE];
+      evaluate (offspring, sortedOffspring, sortedOffspringFitnesses);
+      if (sortedOffspringFitnesses [0] <= sortedFitnesses [0])
+        terminate = true;
+      else
+      {
+        sortedPopulation = sortedOffspring;
+        sortedFitnesses = sortedOffspringFitnesses;
+        generation++;
+      }
     }
   }
 
@@ -167,10 +171,9 @@ public class TspGa
     return offspring;
   }
   
-  private void printPopulation (char[][] population)
+  private String routeToString (char[] route)
   {
-    for (char[] individual : population)
-        System.out.println (java.util.Arrays.toString (individual));
+    return STARTCITY + java.util.Arrays.toString (route) + STARTCITY;
   }
 
   // returns an array ind of indices which sorts the fitness array so
