@@ -65,7 +65,7 @@ public class TspGa
     }
 
     // GA constants
-    POPULATION_SIZE = 10;
+    POPULATION_SIZE = 4;
     NUM_ELITES = 2;
   }
   
@@ -161,7 +161,7 @@ public class TspGa
       int[] parentIndices = new int [2];
       RandomUtils.randomIntegerPair (numParents, parentIndices);
       offspring [numOffspring++] = crossover.crossover (parents [parentIndices [0]],
-                                                        parents [parentIndices [0]]);
+                                                        parents [parentIndices [1]]);
     }
 
     return offspring;
