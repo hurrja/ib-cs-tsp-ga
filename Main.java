@@ -4,7 +4,7 @@ public class Main
   {
     final int POPULATION_SIZE = 10000;
     final int NUM_ELITES = 5;
-    final Selection selection = new TruncationSelection (5); // select fittest 1/param
+    final Selection selection = new TruncationSelection (5); // select fittest 1/param of population
     final Crossover crossover = new PMX (); // partially mapped crossover
 
     // switch two random cities on the average in in 1/param individuals
