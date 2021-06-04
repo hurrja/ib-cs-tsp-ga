@@ -77,12 +77,18 @@ public class TspGa
     int generation = 1;
     while (!terminate)
     {
+      // diagnostic stats printed for every generation
       System.out.print ("gen [ " + generation + " ] fit [ " + sortedFitnesses [0] + " ] ");
       System.out.print ("best [ " + routeToString (sortedPopulation [0]) + " ] ");
       System.out.println ("mid [ " + midValue (sortedFitnesses) + " ]");
+
+      // selection, crossover and mutation
       char[][] sortedParents = selection.select (sortedPopulation, sortedFitnesses);
       char[][] offspring = reproduce (sortedParents, crossover, POPULATION_SIZE, NUM_ELITES);
+      for (int i = NUM_ELITES; i < POPULATION_SIZE; i++) // elites not mutated
+        mutation.mutate (offspring [i]);
 
+      // evaluation of new generation
       char[][] sortedOffspring = new char [POPULATION_SIZE][];
       int[] sortedOffspringFitnesses = new int [POPULATION_SIZE];
       evaluate (offspring, sortedOffspring, sortedOffspringFitnesses);
@@ -218,8 +224,6 @@ public class TspGa
   final int NUM_VISITED_CITIES;
   Map<Character, Map<Character, Integer>> distances;
 }
-
-class Mutation {}
 
 // comparator for array of indices based on values from the array the
 // indices refer to (for index sorting based on array contents)

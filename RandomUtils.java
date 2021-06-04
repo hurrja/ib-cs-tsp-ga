@@ -19,5 +19,5 @@ class RandomUtils
     ints [1] = Math.max (pair [0], pair [1]);
   }
 
-  static Random randomGenerator = new Random ();
+  public static Random randomGenerator = new Random ();
 }
