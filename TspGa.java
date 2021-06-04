@@ -8,9 +8,8 @@ import java.util.Arrays;
 
 public class TspGa
 {
-  public TspGa (Selection selection,
-                Crossover crossover,
-                Mutation mutation)
+  // if no mutation is desired, parameter mutation can be null
+  public TspGa (Selection selection, Crossover crossover, Mutation mutation)
   {
     this.selection = selection;
     this.crossover = crossover;
@@ -82,11 +81,14 @@ public class TspGa
       System.out.print ("best [ " + routeToString (sortedPopulation [0]) + " ] ");
       System.out.println ("mid [ " + midValue (sortedFitnesses) + " ]");
 
-      // selection, crossover and mutation
+      // selection and crossover
       char[][] sortedParents = selection.select (sortedPopulation, sortedFitnesses);
       char[][] offspring = reproduce (sortedParents, crossover, POPULATION_SIZE, NUM_ELITES);
-      for (int i = NUM_ELITES; i < POPULATION_SIZE; i++) // elites not mutated
-        mutation.mutate (offspring [i]);
+
+      // mutation if so desired
+      if (mutation != null)
+        for (int i = NUM_ELITES; i < POPULATION_SIZE; i++) // elites not mutated
+          mutation.mutate (offspring [i]);
 
       // evaluation of new generation
       char[][] sortedOffspring = new char [POPULATION_SIZE][];
