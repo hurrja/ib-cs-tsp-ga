@@ -10,13 +10,11 @@ public class TspGa
 {
   public TspGa (Selection selection,
                 Crossover crossover,
-                Mutation mutation,
-                Termination termination)
+                Mutation mutation)
   {
     this.selection = selection;
     this.crossover = crossover;
     this.mutation = mutation;
-    this.termination = termination;
 
     // TSP constants
     STARTCITY = 'X';
@@ -65,8 +63,8 @@ public class TspGa
     }
 
     // GA constants
-    POPULATION_SIZE = 4;
-    NUM_ELITES = 2;
+    POPULATION_SIZE = 10000;
+    NUM_ELITES = Math.min (5, POPULATION_SIZE);
   }
   
   void run ()
@@ -80,14 +78,19 @@ public class TspGa
     while (!terminate)
     {
       System.out.print ("gen [ " + generation + " ] fit [ " + sortedFitnesses [0] + " ] ");
-      System.out.println (" best [ " + routeToString (sortedPopulation [0]) + " ]");
+      System.out.print ("best [ " + routeToString (sortedPopulation [0]) + " ] ");
+      System.out.println ("mid [ " + midValue (sortedFitnesses) + " ]");
       char[][] sortedParents = selection.select (sortedPopulation, sortedFitnesses);
       char[][] offspring = reproduce (sortedParents, crossover, POPULATION_SIZE, NUM_ELITES);
 
       char[][] sortedOffspring = new char [POPULATION_SIZE][];
       int[] sortedOffspringFitnesses = new int [POPULATION_SIZE];
       evaluate (offspring, sortedOffspring, sortedOffspringFitnesses);
-      if (sortedOffspringFitnesses [0] <= sortedFitnesses [0])
+
+      // termination if no improvement in top individual or midvalue
+      // of fitnesses
+      if (sortedOffspringFitnesses [0] <= sortedFitnesses [0]
+          && midValue (sortedOffspringFitnesses) <= midValue (sortedFitnesses))
         terminate = true;
       else
       {
@@ -173,9 +176,21 @@ public class TspGa
   
   private String routeToString (char[] route)
   {
-    return STARTCITY + java.util.Arrays.toString (route) + STARTCITY;
+    StringBuffer strBuf = new StringBuffer ();
+    strBuf.append (STARTCITY);
+    for (char c : route)
+      strBuf.append (c);
+    strBuf.append (STARTCITY);
+
+    return strBuf.toString ();
   }
 
+  // quick and dirty "median"
+  private int midValue (int[] array)
+  {
+    return array [array.length / 2];
+  }
+  
   // returns an array ind of indices which sorts the fitness array so
   // that fitnesses[ind[0]] > fitnesses[ind[1]] > fitnesses[ind[2]]
   // etc.
@@ -205,7 +220,6 @@ public class TspGa
 }
 
 class Mutation {}
-class Termination {}
 
 // comparator for array of indices based on values from the array the
 // indices refer to (for index sorting based on array contents)
