@@ -9,8 +9,14 @@ import java.util.Arrays;
 public class TspGa
 {
   // if no mutation is desired, parameter mutation can be null
-  public TspGa (Selection selection, Crossover crossover, Mutation mutation)
+  public TspGa (int populationSize,
+                int numElites,
+                Selection selection,
+                Crossover crossover,
+                Mutation mutation)
   {
+    POPULATION_SIZE = populationSize;
+    NUM_ELITES = numElites;
     this.selection = selection;
     this.crossover = crossover;
     this.mutation = mutation;
@@ -61,9 +67,6 @@ public class TspGa
       distances.put (CITIES [i], cityDistances);
     }
 
-    // GA constants
-    POPULATION_SIZE = 10000;
-    NUM_ELITES = Math.min (5, POPULATION_SIZE);
   }
   
   void run ()
