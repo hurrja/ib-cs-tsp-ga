@@ -21,6 +21,8 @@ public class TspGa
     // TSP constants
     STARTCITY = 'X';
     VISITED_CITIES = "ABCDEFGHIJKLMNOPQRST".toCharArray ();
+    NUM_VISITED_CITIES = VISITED_CITIES.length;
+
     CITIES = new char [VISITED_CITIES.length + 1];
     CITIES [0] = STARTCITY;
     for (int i = 1; i < CITIES.length; i++)
@@ -103,10 +105,8 @@ public class TspGa
     for (int i = 0; i < POPULATION_SIZE; i++)
     {
       Collections.shuffle (visitedCities);
-      population [i] = new char [NUM_CITIES + 1];
-      population [i][0] = STARTCITY;
-      population [i][NUM_CITIES] = STARTCITY;
-      int j = 1;
+      population [i] = new char [NUM_VISITED_CITIES];
+      int j = 0;
       for (char c : visitedCities)
         population [i][j++] = c;
     }
@@ -125,8 +125,12 @@ public class TspGa
     for (int i = 0; i < population.length; i++)
     {
       char[] route = population [i];
-      fitnesses [i] = 0;
       
+      // add distances from and to start city
+      fitnesses [i] = distances.get (STARTCITY).get (route [0]);
+      fitnesses [i] -= distances.get (STARTCITY).get (route [route.length - 1]);
+      
+      // add city to city distances
       for (int j = 0; j < route.length - 1; j++)
         fitnesses [i] -= distances.get (route [j]).get (route [j + 1]);
     }
@@ -193,6 +197,7 @@ public class TspGa
   final char[] VISITED_CITIES;
   final char[] CITIES;
   final int NUM_CITIES;
+  final int NUM_VISITED_CITIES;
   Map<Character, Map<Character, Integer>> distances;
 }
 
