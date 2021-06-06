@@ -1,6 +1,6 @@
 import java.util.Random;
 
-class RandomUtils
+public class RandomUtils
 {
   // generate a pair of distinct random integers in range
   // [0,...,upper-1], returning them in 2nd and 3rd parameter
@@ -11,6 +11,7 @@ class RandomUtils
     ints [1] = (r + ints [0] + 1) % upper;
   }
 
+  // same as above, but returned indices are in increasing order
   static public void randomSortedIntegerPair (int upper, int[] ints)
   {
     int[] pair = new int [2];

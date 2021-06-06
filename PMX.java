@@ -1,4 +1,4 @@
-class PMX extends Crossover
+public class PMX extends Crossover
 {
   char[] crossover (char[] parentA, char[] parentB)
   {
