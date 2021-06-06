@@ -4,6 +4,23 @@
    to find a solution to the travelling salesman problem (TSP). TSP
    data is taken from IBO CS genetic algorithm case study.
 
+   The current version uses truncation selection, PMX crossover, and
+   city-switch mutation. The algorithm terminates if there is no
+   improvment in the fittest individual and no improvement in
+   \ldquo{}median\rdquo fitness from previous generation.
+
+** Usage
+   For basic usage, just compile and run the program (see below). All
+   program data and parameters are coded in.
+
+   To explore the role of parameters -- such as population size,
+   number of elites, or mutation rate -- change corresponding values
+   in class =Main=.
+
+   To explore alternative methods of, for example, crossover, you can
+   write a corresponding subclass of the abstract base class,
+   construct it in =Main=, and pass it to class =TSPGeneticAlgorithm=.
+   
 ** Installation in IDEA
    To install the application in IDEA, do the following:
    1. Clone the repository.
