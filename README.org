@@ -1,0 +1,32 @@
+* IB CS genetic algorithm case study program
+** The purpose of this repository
+   This repository contains a program implementing a genetic algorithm
+   to find a solution to the travelling salesman problem (TSP). TSP
+   data is taken from IBO CS genetic algorithm case study.
+
+** Installation in IDEA
+   To install the application in IDEA, do the following:
+   1. Clone the repository.
+   2. Right click on class =Main=.
+   3. Select =Run Main.main()=
+   You are now able to make changes to the project and run it again.
+
+** Alternative installation method
+   1. Clone repository.
+   2. Run =ant= default target (builds and runs the application).
+   
+** License
+   Copyright (C) 2021 Jarmo Hurri
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.
