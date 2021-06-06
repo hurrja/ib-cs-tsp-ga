@@ -103,8 +103,11 @@ public class TSPGeneticAlgorithm
       char[][] sortedOffspring = new char [POPULATION_SIZE][];
       int[] sortedOffspringFitnesses = new int [POPULATION_SIZE];
       evaluate (offspring, sortedOffspring, sortedOffspringFitnesses);
+
+      // check for termination
       terminate = terminationRule.terminates (sortedFitnesses, sortedOffspringFitnesses);
 
+      // current offsprings form population
       sortedPopulation = sortedOffspring;
       sortedFitnesses = sortedOffspringFitnesses;
     }
