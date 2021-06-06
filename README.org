@@ -20,7 +20,17 @@
    To explore alternative methods of, for example, crossover,
    implement a corresponding subclass of the abstract base class,
    construct it in =Main=, and pass it to class =TSPGeneticAlgorithm=.
-   
+
+** Measure of fitness   
+   Genetic algorithms maximize fitness. In TSP, route length is
+   minimized. So route length can not be used as a direct measure of
+   fitness.
+
+   In this implementation, the measure of fitness is the /negative/ of
+   route length. When this is maximized, route length is
+   minimized. This measure allows the user to immediately see the
+   corresponding route length from a fitness value.
+
 ** Installation in IDEA
    To install the application in IDEA, do the following:
    1. Clone the repository.
