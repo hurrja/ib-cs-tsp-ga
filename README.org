@@ -17,8 +17,8 @@
    number of elites, or mutation rate -- change corresponding values
    in class =Main=.
 
-   To explore alternative methods of, for example, crossover, you can
-   write a corresponding subclass of the abstract base class,
+   To explore alternative methods of, for example, crossover,
+   implement a corresponding subclass of the abstract base class,
    construct it in =Main=, and pass it to class =TSPGeneticAlgorithm=.
    
 ** Installation in IDEA
