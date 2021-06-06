@@ -13,13 +13,15 @@ public class TSPGeneticAlgorithm
                               int numElites,
                               Selection selection,
                               Crossover crossover,
-                              Mutation mutation)
+                              Mutation mutation,
+                              TerminationRule terminationRule)
   {
     POPULATION_SIZE = populationSize;
     NUM_ELITES = numElites;
     this.selection = selection;
     this.crossover = crossover;
     this.mutation = mutation;
+    this.terminationRule = terminationRule;
 
     // TSP constants
     STARTCITY = 'X';
@@ -78,9 +80,11 @@ public class TSPGeneticAlgorithm
     evaluate (initializePopulation (), sortedPopulation, sortedFitnesses);
 
     boolean terminate = false;
-    int generation = 1;
+    int generation = 0;
     while (!terminate)
     {
+      generation++;
+
       // diagnostic stats printed for every generation
       System.out.print ("gen [ " + generation + " ] fit [ " + sortedFitnesses [0] + " ] ");
       System.out.print ("best [ " + routeToString (sortedPopulation [0]) + " ] ");
@@ -99,18 +103,10 @@ public class TSPGeneticAlgorithm
       char[][] sortedOffspring = new char [POPULATION_SIZE][];
       int[] sortedOffspringFitnesses = new int [POPULATION_SIZE];
       evaluate (offspring, sortedOffspring, sortedOffspringFitnesses);
+      terminate = terminationRule.terminates (sortedFitnesses, sortedOffspringFitnesses);
 
-      // termination if no improvement in top individual or midvalue
-      // of fitnesses
-      if (sortedOffspringFitnesses [0] <= sortedFitnesses [0]
-          && midValue (sortedOffspringFitnesses) <= midValue (sortedFitnesses))
-        terminate = true;
-      else
-      {
-        sortedPopulation = sortedOffspring;
-        sortedFitnesses = sortedOffspringFitnesses;
-        generation++;
-      }
+      sortedPopulation = sortedOffspring;
+      sortedFitnesses = sortedOffspringFitnesses;
     }
   }
 
@@ -200,7 +196,7 @@ public class TSPGeneticAlgorithm
   }
 
   // quick and dirty "median"
-  private int midValue (int[] array)
+  public static int midValue (int[] array)
   {
     return array [array.length / 2];
   }
@@ -222,7 +218,7 @@ public class TSPGeneticAlgorithm
   private Selection selection;
   private Crossover crossover;
   private Mutation mutation;
-  private Termination termination;
+  private TerminationRule terminationRule;
   final int POPULATION_SIZE;
   final int NUM_ELITES;
   final char STARTCITY;
