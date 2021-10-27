@@ -18,7 +18,7 @@ import java.util.Random;
 public class RandomUtils
 {
   // generate a pair of distinct random integers in range
-  // [0,...,upper-1], returning them in 2nd and 3rd parameter
+  // [0,...,upper-1], returning them in 2nd parameter
   static public void randomIntegerPair (int upper, int[] ints)
   {
     ints [0] = randomGenerator.nextInt (upper);
