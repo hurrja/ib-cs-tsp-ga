@@ -6,7 +6,7 @@
 
    The current version uses truncation selection, PMX crossover, and
    city-switch mutation. The algorithm terminates if there is no
-   improvment in the fittest individual and no improvement in
+   improvement in the fittest individual and no improvement in
    \ldquo{}median\rdquo fitness from previous generation.
 
 ** Usage
@@ -21,7 +21,7 @@
    implement a corresponding subclass of the abstract base class,
    construct it in =Main=, and pass it to class =TSPGeneticAlgorithm=.
 
-** Measure of fitness   
+** Measure of fitness
    Genetic algorithms maximize fitness. In TSP, route length is
    minimized. So route length can not be used as a direct measure of
    fitness.
