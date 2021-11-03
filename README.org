@@ -5,7 +5,8 @@
    data is taken from IBO CS genetic algorithm case study.
 
    The current version supports 
-   - truncation and roulette wheel selection (see file =Main.java=)
+   - truncation selection; roulette wheel selection, and tournament
+     selection (see file =Main.java=)
    - PMX crossover
    - city-switch mutation. 
    The algorithm terminates if there is no improvement in the fittest
