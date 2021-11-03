@@ -4,10 +4,13 @@
    to find a solution to the travelling salesman problem (TSP). TSP
    data is taken from IBO CS genetic algorithm case study.
 
-   The current version uses truncation selection, PMX crossover, and
-   city-switch mutation. The algorithm terminates if there is no
-   improvement in the fittest individual and no improvement in
-   \ldquo{}median\rdquo fitness from previous generation.
+   The current version supports 
+   - truncation and roulette wheel selection (see file =Main.java=)
+   - PMX crossover
+   - city-switch mutation. 
+   The algorithm terminates if there is no improvement in the fittest
+   individual and no improvement in \ldquo{}median\rdquo fitness from
+   previous generation.
 
 ** Usage
    For basic usage, just compile and run the program (see below). All
@@ -43,7 +46,7 @@
    2. Run =ant= default target (builds and runs the application).
    
 ** License
-   Copyright (C) 2021 Jarmo Hurri
+   Copyright (C) 2021 Jarmo Hurri and Askar Tuiushev
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by

@@ -107,7 +107,7 @@ public class TSPGeneticAlgorithm
 
       // selection and crossover
       char[][] sortedParents = selection.select (sortedPopulation, sortedFitnesses);
-      char[][] offspring = reproduce (sortedParents, crossover, POPULATION_SIZE, NUM_ELITES);
+      char[][] offspring = reproduce (sortedParents, sortedPopulation, crossover, POPULATION_SIZE, NUM_ELITES);
 
       // mutation if so desired
       if (mutation != null)
@@ -169,6 +169,13 @@ public class TSPGeneticAlgorithm
       for (int j = 0; j < route.length - 1; j++)
         fitnesses [i] -= distances.get (route [j]).get (route [j + 1]);
     }
+
+    sort (population, fitnesses, sortedPopulation, sortedFitnesses);
+  }
+
+  public static void sort (char[][] population, Integer[] fitnesses,
+                           char[][] sortedPopulation, int[] sortedFitnesses)
+  {
     Integer[] sortedIndices = sortIndices (fitnesses);
     for (int i = 0; i < population.length; i++)
     {
@@ -179,6 +186,7 @@ public class TSPGeneticAlgorithm
   }
 
   private char[][] reproduce (char[][] parents,
+                              char[][] population,
                               Crossover crossover,
                               int populationSize,
                               int numElites)
@@ -188,7 +196,7 @@ public class TSPGeneticAlgorithm
 
     // select elites for next round
     for (numOffspring = 0; numOffspring < numElites && numOffspring < populationSize; numOffspring++)
-      offspring [numOffspring] = parents [numOffspring];
+      offspring [numOffspring] = population [numOffspring];
     
     int numParents = parents.length;
     while (numOffspring < populationSize)
@@ -222,7 +230,7 @@ public class TSPGeneticAlgorithm
   // returns an array ind of indices which sorts the fitness array so
   // that fitnesses[ind[0]] > fitnesses[ind[1]] > fitnesses[ind[2]]
   // etc.
-  private Integer[] sortIndices (Integer[] fitnesses)
+  private static Integer[] sortIndices (Integer[] fitnesses)
   {
     ArrayIndexComparator comparator = new ArrayIndexComparator (fitnesses);
     Integer[] indices = comparator.createIndexArray ();

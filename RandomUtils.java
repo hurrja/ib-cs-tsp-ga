@@ -35,5 +35,11 @@ public class RandomUtils
     ints [1] = Math.max (pair [0], pair [1]);
   }
 
+  // random sample from uniform distribution in [0, 1]
+  static public double randomUniform ()
+  {
+    return randomGenerator.nextDouble ();
+  }
+  
   public static Random randomGenerator = new Random ();
 }
