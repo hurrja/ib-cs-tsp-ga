@@ -1,4 +1,5 @@
-// Copyright (C) 2021 Jarmo Hurri
+// Copyright (C) 2021 Jarmo Hurri, Diana Ginzburg, Gabriel Dearden,
+// Askar Tuiushev
 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
