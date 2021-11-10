@@ -19,10 +19,11 @@ public class Main
   {
     final int POPULATION_SIZE = 10000;
     final int NUM_ELITES = 5;
-    // final Selection selection = new TruncationSelection (5); // select fittest 1/param of population
+    final Selection selection = new TruncationSelection (5); // select fittest 1/param of population
     // final Selection selection = new RouletteWheelSelection (POPULATION_SIZE / 3);
-    final Selection selection = new TournamentSelection (POPULATION_SIZE / 3, 2);
-    final Crossover crossover = new PMX (); // partially mapped crossover
+    // final Selection selection = new TournamentSelection (POPULATION_SIZE / 3, 2);
+    // final Crossover crossover = new PMX (); // partially mapped crossover
+    final Crossover crossover = new OX (); // order crossover
 
     // switch two random cities on the average in in 1/param individuals
     final Mutation mutation = new SwitchMutation (20); 
