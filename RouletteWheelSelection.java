@@ -32,9 +32,8 @@ public class RouletteWheelSelection extends Selection
     // fitness
     int minFitness = fitnesses [fitnesses.length - 1];
     int[] positiveFitnesses = new int [fitnesses.length];
-    for (int i = 0; i < positiveFitnesses.length; i++) {
+    for (int i = 0; i < fitnesses.length; i++)
       positiveFitnesses [i] = fitnesses [i] - minFitness;
-    }
     
     // convert "positive" fitnesses into corresponding probabilities
     int sumOfFitnesses = 0;
@@ -45,7 +44,8 @@ public class RouletteWheelSelection extends Selection
     double[] cumulativeProbs = new double [positiveFitnesses.length];
 
     double sumOfProb = 0;
-    for(int i = 0; i < positiveFitnesses.length; i++) {
+    for (int i = 0; i < positiveFitnesses.length; i++)
+    {
       sumOfProb += ((double) positiveFitnesses [i]) / sumOfFitnesses;
       cumulativeProbs [i] = sumOfProb;
     }
