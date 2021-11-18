@@ -7,7 +7,7 @@
    The current version supports 
    - truncation selection; roulette wheel selection, and tournament
      selection (see file =Main.java=)
-   - PMX crossover
+   - PMX, OX and CX crossover (see file =Main.java=)
    - city-switch mutation. 
    The algorithm terminates if there is no improvement in the fittest
    individual and no improvement in \ldquo{}median\rdquo fitness from
@@ -47,7 +47,8 @@
    2. Run =ant= default target (builds and runs the application).
    
 ** License
-   Copyright (C) 2021 Jarmo Hurri and Askar Tuiushev
+   Copyright (C) 2021 Jarmo Hurri, Askar Tuiushev, Gabriel Dearden and
+   Diana Ginzburg
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
