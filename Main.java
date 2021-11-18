@@ -23,7 +23,8 @@ public class Main
     // final Selection selection = new RouletteWheelSelection (POPULATION_SIZE / 3);
     // final Selection selection = new TournamentSelection (POPULATION_SIZE / 3, 2);
     // final Crossover crossover = new PMX (); // partially mapped crossover
-    final Crossover crossover = new OX (); // order crossover
+    // final Crossover crossover = new OX (); // order crossover
+    final Crossover crossover = new CX (); // cycle crossover
 
     // switch two random cities on the average in in 1/param individuals
     final Mutation mutation = new SwitchMutation (20); 
