@@ -9,6 +9,7 @@
     <javac includeantruntime="false" srcdir="." destdir="${class-dir}">
       <compilerarg value="-Xlint"/>
       <compilerarg value="-Xlint:-serial"/>
+      <!-- <compilerarg value="-g"/> -->
     </javac>
   </target>
   <target name="jar" depends="compile">
